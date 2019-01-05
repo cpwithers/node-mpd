@@ -120,9 +120,15 @@ MPD.prototype._answerCallbackError = function(r, cb) {
  * Connect and disconnect
  */
 
-MPD.prototype.connect = function() {
+MPD.prototype.connect = function(keepAlive) {
 	this.client = new Socket();
 	this.client.setEncoding('utf8');
+	
+	//Maintains a connection for long running client.
+	if(keepAlive) {	
+		this.client.setKeepAlive(true,0);
+	}
+
 	this.commanding = true;
 	this.client.connect(this.port, this.host, function() {
 		this.client.once('data', this._initialGreeting.bind(this))
