@@ -58,6 +58,12 @@ Song.createFromInfoArray = function(lines, mpd) {
 			case "Genre":
 				info.genre = value;
 				break;
+			case "Album":
+				info.album = value;
+				break;
+			case "AlbumArtist":
+				info.albumArtist = value;
+				break;
 		}
 	}
 	return new Song(info, mpd);
